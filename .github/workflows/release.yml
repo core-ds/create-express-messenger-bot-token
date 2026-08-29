@@ -1,0 +1,35 @@
+name: release
+
+on:
+  push:
+    branches:
+      - main
+      - version/**
+
+concurrency: ${{ github.workflow }}-${{ github.ref }}
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Generate app token
+        id: generate-token
+        uses: actions/create-github-app-token@v3
+        with:
+          client-id: ${{ vars.APP_ID }}
+          private-key: ${{ secrets.APP_PRIVATE_KEY }}
+
+      - name: Checkout
+        uses: actions/checkout@v7
+        with:
+          token: ${{ steps.generate-token.outputs.token }}
+
+      - uses: $/.github/actions/ci-setup
+
+      - name: Create release pull request or publish
+        uses: changesets/action@v2
+        with:
+          publish-script: "yarn release"
+          version-script: "yarn version-package"
+          commit-message: "chore: version package"
+          github-token: ${{ steps.generate-token.outputs.token }}

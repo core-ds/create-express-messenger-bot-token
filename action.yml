@@ -1,0 +1,19 @@
+name: "Create Express messenger bot token"
+description: GitHub action to create Express messenger bot token
+runs:
+  using: "node24"
+  main: "dist/index.cjs"
+  post: "dist/post.cjs"
+inputs:
+  express-server-url:
+    description: "Express messenger server url"
+    required: true
+  bot-id:
+    description: "Express messenger bot ID"
+    required: true
+  secret-key:
+    description: "Express messenger bot secret key"
+    required: true
+outputs:
+  token:
+    description: "Express messenger bot token"
