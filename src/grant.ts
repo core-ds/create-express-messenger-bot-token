@@ -38,7 +38,11 @@ export async function main(): Promise<string> {
     }
   );
 
-  core.saveState("token", token);
+  core.setSecret(token);
+  core.setOutput("token", token);
+
+  // TODO implement as revoke is released
+  // core.saveState("token", token);
 
   return token;
 }
