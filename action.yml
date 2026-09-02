@@ -2,7 +2,7 @@ name: "Create Express messenger bot token"
 description: GitHub action to create Express messenger bot token
 runs:
   using: "node24"
-  main: "dist/index.cjs"
+  main: "dist/main.cjs"
   post: "dist/post.cjs"
 inputs:
   express-server-url:

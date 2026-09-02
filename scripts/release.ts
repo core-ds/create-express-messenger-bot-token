@@ -1,5 +1,3 @@
-// @ts-check
-
 // copied from https://github.com/changesets/action/blob/04d574e831923498156e0b2b93152878063203a3/scripts/release.ts
 
 import pkg from "../package.json" with { type: "json" };
@@ -39,7 +37,7 @@ async function main() {
   await exec("git", ["add", "--force", "dist"]);
   await exec("git", ["commit", "-m", `publish: v${version}`]);
 
-  await exec("changeset", ["tag"]);
+  await exec("changeset", ["git-tag"]);
 
   const [major] = version.split(".");
   const branch = `v${major}`;
