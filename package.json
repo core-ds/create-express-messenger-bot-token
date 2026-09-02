@@ -13,7 +13,7 @@
     "check-types": "tsc --noEmit",
     "format": "prettier --check \"./**/*.{ts,mjs,json,md,yml}\"",
     "lint": "eslint . --ext .ts,.mjs",
-    "release": "yarn build && node scripts/release.mjs",
+    "release": "yarn build && node scripts/release.ts",
     "version-package": "changeset version"
   },
   "dependencies": {
