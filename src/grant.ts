@@ -9,7 +9,7 @@ export async function main(): Promise<string> {
   const botId = core.getInput("bot-id", { required: true });
   const secretKey = core.getInput("secret-key", { required: true });
 
-  const signature = createHmac("sha256", secretKey).update(botId).digest("hex");
+  const signature = createHmac("sha256", secretKey).update(botId).digest("hex").toUpperCase(); // using rfc4648: 0-9 A-Z
   const url = new URL(`/api/v2/botx/bots/${botId}/token`, serverUrl);
   url.searchParams.append("signature", signature);
 
